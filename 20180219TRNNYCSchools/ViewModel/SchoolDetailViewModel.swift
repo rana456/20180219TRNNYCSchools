@@ -38,6 +38,6 @@ class SchoolDetailViewModel {
         if let detail = self.schoolDetail?.first {
             return "\(detail.schoolName)  \n \n \n \(ConstantString.satTestTakers) : \(detail.numOfSatTestTakers) \n \n \(ConstantString.criticalReadingAvgScore) : \(detail.satCriticalReadingAvgScore)"
         }
-        return ""
+        return "Data not Available!!"
     }
 }
