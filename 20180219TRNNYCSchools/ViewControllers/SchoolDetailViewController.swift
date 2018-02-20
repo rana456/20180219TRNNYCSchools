@@ -13,19 +13,16 @@ class SchoolDetailViewController: UIViewController {
     
     var schoolObj: SchoolElement?
     @IBOutlet weak var detailLabel:UILabel!
-    
+    var viewModel: SchoolDetailViewModel = SchoolDetailViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if let school = schoolObj {
             self.detailLabel.text = school.schoolName
             SVProgressHUD.show()
-            SchoolViewModel().getDetailsOfSchool(school: school) { (details) in
-                DispatchQueue.main.async {
-                    if let detail = details.first {
-                        self.detailLabel.text = "  \(detail.schoolName)  \n \n \n \(ConstantString.satTestTakers) : \(detail.numOfSatTestTakers) \n \n \(ConstantString.criticalReadingAvgScore) : \(detail.satCriticalReadingAvgScore)"
-                    }
-                    SVProgressHUD.dismiss()
-                }
+            viewModel.getDetailsOfSchool(school: school) { () in
+                self.detailLabel.text = self.viewModel.detailsOfSchool()
+                SVProgressHUD.dismiss()
             }
         }
     }

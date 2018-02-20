@@ -8,6 +8,8 @@
 
 import Foundation
 
+// - This APIRequest will be called by the viewModel to get School Data.
+
 class APIRequest<T> {
     
     var url: URL
@@ -18,6 +20,9 @@ class APIRequest<T> {
         self.type = type
     }
     
+    //- the completion handler will be executed after data is fetched
+    // our completion handler will include an optional Object parsed from our retrieved JSON object
+
     func getResponse(responseHandler: @escaping (Any?, Error?) -> ()) {
         URLSession(configuration: URLSessionConfiguration.default).dataTask(with: url) { (data, response, error) in
             
