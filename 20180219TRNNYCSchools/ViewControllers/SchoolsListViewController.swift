@@ -20,9 +20,13 @@ class SchoolsListViewController: UIViewController {
         super.viewDidLoad()
         self.title = ConstantString.schoolListTitle
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Making TableviewCell Height as dynamic
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
         SVProgressHUD.show()
+        
         viewModel.getSchoolLists(completion: {() in
             self.tableView.reloadData()
             SVProgressHUD.dismiss()
@@ -31,7 +35,7 @@ class SchoolsListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
+      //When Navigating to SchoolDetailViewController passing SchoolElement Object
         let designationController = segue.destination as? SchoolDetailViewController
         if let cell = sender as? SchoolCell, let indexPath = tableView.indexPath(for: cell) {
             if let schoolObject = viewModel.schoolObject(for: indexPath) {
